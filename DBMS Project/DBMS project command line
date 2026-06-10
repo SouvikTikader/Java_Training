@@ -1,0 +1,183 @@
+mysql> create table bookshelf(BID int(100) primary key,
+    -> Bname varchar(50),
+    -> Author varchar(50
+    -> ),
+    -> pages int(30) not null );
+Query OK, 0 rows affected, 2 warnings (0.16 sec)
+
+mysql> insert into bookshelf values(1,"Tales of Naria","Christ Steve",99);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into bookshelf values(2,"Guliver's Travels","Montana Romana",199);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into bookshelf values(3,"Apple VS Doctor","Truly nice",109);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into bookshelf values(4,"May the heavens fall","Dark Mice",80);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into bookshelf values(5,"When all is done","Peace Duck",50);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into bookshelf values(6,"Never gonna give you up","Rick Roll",120);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into bookshelf values(7,"Tungtungtung Sahur tales","Brain Rot",267);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into bookshelf values(8,"Shadow Slave","Guilty3",3000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into bookshelf values(9,"Dishoom","Director",30);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into bookshelf values(10,"Jurrasic Garden","Survivor Hen",999);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> Select * from bookshelf;
++-----+--------------------------+----------------+-------+
+| BID | Bname                    | Author         | pages |
++-----+--------------------------+----------------+-------+
+|   1 | Tales of Naria           | Christ Steve   |    99 |
+|   2 | Guliver's Travels        | Montana Romana |   199 |
+|   3 | Apple VS Doctor          | Truly nice     |   109 |
+|   4 | May the heavens fall     | Dark Mice      |    80 |
+|   5 | When all is done         | Peace Duck     |    50 |
+|   6 | Never gonna give you up  | Rick Roll      |   120 |
+|   7 | Tungtungtung Sahur tales | Brain Rot      |   267 |
+|   8 | Shadow Slave             | Guilty3        |  3000 |
+|   9 | Dishoom                  | Director       |    30 |
+|  10 | Jurrasic Garden          | Survivor Hen   |   999 |
++-----+--------------------------+----------------+-------+
+10 rows in set (0.00 sec)
+
+mysql> Select * from bookshelf
+    -> where Author="Guilty3";
++-----+--------------+---------+-------+
+| BID | Bname        | Author  | pages |
++-----+--------------+---------+-------+
+|   8 | Shadow Slave | Guilty3 |  3000 |
++-----+--------------+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> Select * from bookshelf
+    -> where Author="Rick Roll";
++-----+-------------------------+-----------+-------+
+| BID | Bname                   | Author    | pages |
++-----+-------------------------+-----------+-------+
+|   6 | Never gonna give you up | Rick Roll |   120 |
++-----+-------------------------+-----------+-------+
+1 row in set (0.01 sec)
+
+mysql> alter table bookshelf
+    -> add genre varchar(30);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table bookshelf
+    -> add Status varchar(30);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update bookshelf
+    -> set Status="Reading";
+Query OK, 10 rows affected (0.01 sec)
+Rows matched: 10  Changed: 10  Warnings: 0
+
+mysql> update bookshelf
+    -> set genre="Action"
+    -> where pages=109;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update bookshelf
+    -> set genre="Comedy"
+    -> where pages >50 and pages<200;
+Query OK, 5 rows affected (0.01 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> update bookshelf
+    -> set genre="Slice of Life"
+    -> where pages<51;
+Query OK, 2 rows affected (0.18 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> update bookshelf
+    -> set genre="Action"
+    -> where pages=109;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update bookshelf
+    -> set genre="Action"
+    -> where pages=3000;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> Select * from bookshelf;
++-----+--------------------------+----------------+-------+---------------+---------+
+| BID | Bname                    | Author         | pages | genre         | Status  |
++-----+--------------------------+----------------+-------+---------------+---------+
+|   1 | Tales of Naria           | Christ Steve   |    99 | Comedy        | Reading |
+|   2 | Guliver's Travels        | Montana Romana |   199 | Comedy        | Reading |
+|   3 | Apple VS Doctor          | Truly nice     |   109 | Action        | Reading |
+|   4 | May the heavens fall     | Dark Mice      |    80 | Comedy        | Reading |
+|   5 | When all is done         | Peace Duck     |    50 | Slice of Life | Reading |
+|   6 | Never gonna give you up  | Rick Roll      |   120 | Comedy        | Reading |
+|   7 | Tungtungtung Sahur tales | Brain Rot      |   267 | NULL          | Reading |
+|   8 | Shadow Slave             | Guilty3        |  3000 | Action        | Reading |
+|   9 | Dishoom                  | Director       |    30 | Slice of Life | Reading |
+|  10 | Jurrasic Garden          | Survivor Hen   |   999 | NULL          | Reading |
++-----+--------------------------+----------------+-------+---------------+---------+
+10 rows in set (0.00 sec)
+
+mysql> Select * from bookshelf
+    -> where genre ="Comedy";
++-----+-------------------------+----------------+-------+--------+---------+
+| BID | Bname                   | Author         | pages | genre  | Status  |
++-----+-------------------------+----------------+-------+--------+---------+
+|   1 | Tales of Naria          | Christ Steve   |    99 | Comedy | Reading |
+|   2 | Guliver's Travels       | Montana Romana |   199 | Comedy | Reading |
+|   4 | May the heavens fall    | Dark Mice      |    80 | Comedy | Reading |
+|   6 | Never gonna give you up | Rick Roll      |   120 | Comedy | Reading |
++-----+-------------------------+----------------+-------+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql> update bookshelf
+    -> set Status="Finished"
+    -> where pages<150;
+Query OK, 6 rows affected (0.01 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+mysql> Select * from bookshelf;
++-----+--------------------------+----------------+-------+---------------+----------+
+| BID | Bname                    | Author         | pages | genre         | Status   |
++-----+--------------------------+----------------+-------+---------------+----------+
+|   1 | Tales of Naria           | Christ Steve   |    99 | Comedy        | Finished |
+|   2 | Guliver's Travels        | Montana Romana |   199 | Comedy        | Reading  |
+|   3 | Apple VS Doctor          | Truly nice     |   109 | Action        | Finished |
+|   4 | May the heavens fall     | Dark Mice      |    80 | Comedy        | Finished |
+|   5 | When all is done         | Peace Duck     |    50 | Slice of Life | Finished |
+|   6 | Never gonna give you up  | Rick Roll      |   120 | Comedy        | Finished |
+|   7 | Tungtungtung Sahur tales | Brain Rot      |   267 | NULL          | Reading  |
+|   8 | Shadow Slave             | Guilty3        |  3000 | Action        | Reading  |
+|   9 | Dishoom                  | Director       |    30 | Slice of Life | Finished |
+|  10 | Jurrasic Garden          | Survivor Hen   |   999 | NULL          | Reading  |
++-----+--------------------------+----------------+-------+---------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> delete from bookshelf
+    -> where Status="Finished";
+Query OK, 6 rows affected (0.01 sec)
+
+mysql> Select * from bookshelf;
++-----+--------------------------+----------------+-------+--------+---------+
+| BID | Bname                    | Author         | pages | genre  | Status  |
++-----+--------------------------+----------------+-------+--------+---------+
+|   2 | Guliver's Travels        | Montana Romana |   199 | Comedy | Reading |
+|   7 | Tungtungtung Sahur tales | Brain Rot      |   267 | NULL   | Reading |
+|   8 | Shadow Slave             | Guilty3        |  3000 | Action | Reading |
+|  10 | Jurrasic Garden          | Survivor Hen   |   999 | NULL   | Reading |
++-----+--------------------------+----------------+-------+--------+---------+
+4 rows in set (0.00 sec)
